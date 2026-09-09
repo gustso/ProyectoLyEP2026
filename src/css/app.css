@@ -1,3 +1,15 @@
+:root{
+    --color-primary:#0e96b8;
+    --color-primary-dark:#0c7a94;
+    --color-primary-light:#4db8d1;
+    --color-bg-soft:#d6f0f5;
+    --color-bg-softer:#e6f6fa;
+    --color-bg-stripe:#f2fafc;
+    --color-border-soft:#a9dbe8;
+    --color-placeholder:#7fa8b3;
+    --color-primary-rgb:14,150,184;
+}
+
 *{
     margin:0;
     padding:0;
@@ -13,18 +25,18 @@ main {
     flex: 1;
 }
 h1{
-    color:#d63384;
+    color:var(--color-primary);
     font-weight:700;
     margin-bottom:25px;
 }
 
 h2{
-    color:#c2185b;
+    color:var(--color-primary-dark);
     margin-bottom:20px;
 }
 
 h3{
-    color:#e75480;
+    color:var(--color-primary-light);
 }
 
 a{
@@ -34,7 +46,7 @@ a{
 hr{
     border:none;
     height:2px;
-    background:#ffd6e7;
+    background:var(--color-bg-soft);
     margin:35px 0;
 }
 
@@ -58,7 +70,7 @@ table a{
 }
 
 ::selection{
-    background:#d63384;
+    background:var(--color-primary);
     color:white;
 }
 

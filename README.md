@@ -6,6 +6,40 @@ Este proyecto consiste en la construccion de un Panel de Control de Clientes uti
 
 Se implementaran tecnologias como React Router Dom, Context API, LocalStorage, peticiones asincronicas y el uso de un framework de interfaz de usuario, para que la experiencia del usuario sea mas dinamica e interactiva.
 
+> **Nota:** FakeStoreAPI es una API de pruebas: los `POST` y `DELETE` responden `200 OK` con datos simulados, pero **no persisten los cambios**. Si creás o eliminás un cliente y recargás la página, va a seguir apareciendo el listado original — es el comportamiento esperado de la API, no un bug de la aplicación.
+
+## Instalación y ejecución
+
+```bash
+npm install
+cp .env.example .env   # ya viene con la URL pública de FakeStoreAPI
+npm run dev
+```
+
+Otros comandos disponibles:
+
+| Comando | Descripción |
+|---|---|
+| `npm run build` | Genera el build de producción |
+| `npm run lint` | Corre ESLint |
+| `npm run format` | Formatea el código con Prettier |
+| `npm run format:check` | Verifica el formato sin modificar archivos |
+
+## Credenciales de prueba
+
+El login es simulado (no hay backend de autenticación): las credenciales están hardcodeadas en `src/services/autorizacionesServices.js`.
+
+| Email | Contraseña | Sector |
+|---|---|---|
+| antonella@gmail.com | Admin123 | Soporte |
+| jimena@gmail.com | Admin123 | Gerencia |
+| maia@gmail.com | Admin123 | Gerencia |
+| abril@gmail.com | Admin123 | Soporte |
+| guadalupe@gmail.com | Admin123 | Soporte |
+| lourdes@gmail.com | Admin123 | Gerencia |
+
+El sector se determina por el usuario logueado: solo el sector **Gerencia** puede eliminar clientes desde la ficha de detalle.
+
 ## Flujo de Trabajo para Equipos LyEP - 2026
 
 Este repositorio está configurado como base para práctica profesional. Si sos parte de un equipo de trabajo, seguí las instrucciones del TP01.

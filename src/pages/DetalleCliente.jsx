@@ -1,59 +1,73 @@
 import '../css/detallecliente.css'
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
- 
-const DetalleCliente = () => {
- const { id } = useParams();
-  const navigate = useNavigate();
-  const role = localStorage.getItem("role");
+import { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import useAutorizaciones from '../hooks/useAutorizaciones'
+import clientesService from '../services/clientesService'
 
-  const [cliente, setCliente] = useState(null);
-  const [mensaje, setMensaje] = useState("");
+const DetalleCliente = () => {
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const { admin } = useAutorizaciones()
+
+  const [cliente, setCliente] = useState(null)
+  const [cargando, setCargando] = useState(true)
+  const [errorCarga, setErrorCarga] = useState(false)
+  const [mensaje, setMensaje] = useState('')
 
   useEffect(() => {
-    fetch(`https://fakestoreapi.com/users/${id}`)
-      .then((res) => res.json())
-      .then((data) => setCliente(data));
-  }, [id]);
+    const controller = new AbortController()
+
+    clientesService
+      .obtenerClientePorId(id, controller.signal)
+      .then((data) => {
+        setCliente(data)
+        setCargando(false)
+      })
+      .catch((err) => {
+        if (err.name === 'CanceledError') return
+        setErrorCarga(true)
+        setCargando(false)
+      })
+
+    return () => controller.abort()
+  }, [id])
 
   const eliminarCliente = async () => {
     try {
-      const respuesta = await fetch(
-        `https://fakestoreapi.com/users/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      await clientesService.eliminarCliente(id)
 
-      if (respuesta.ok) {
-        setMensaje("Cliente eliminado correctamente");
+      setMensaje('Cliente eliminado correctamente')
 
-        setTimeout(() => {
-          navigate("/clientes");
-        }, 2000);
-      }
-    } catch (error) {
-      setMensaje("Error al eliminar cliente");
+      setTimeout(() => {
+        navigate('/clientes')
+      }, 2000)
+    } catch {
+      setMensaje('Error al eliminar cliente')
     }
-  };
-  if (!cliente) {
-    return <h2>Cargando cliente...</h2>;
+  }
+
+  if (cargando) {
+    return <h2>Cargando cliente...</h2>
+  }
+
+  if (errorCarga || !cliente) {
+    return <h2>No se pudo cargar la información del cliente.</h2>
   }
 
   return (
     <div className="detalle-cliente">
       <h1>Ficha del Cliente</h1>
-      <p>Rol actual: {role}</p>
+      <p>Rol actual: {admin?.sector}</p>
 
-      {mensaje && <p className = 'mensaje-eliminado'>{mensaje}</p>}
+      {mensaje && <p className="mensaje-eliminado">{mensaje}</p>}
 
       <p>
         <strong>ID:</strong> {cliente.id}
       </p>
 
       <p>
-        <strong>Nombre:</strong>{" "}
-        {cliente.name.firstname} {cliente.name.lastname}
+        <strong>Nombre:</strong> {cliente.name?.firstname}{' '}
+        {cliente.name?.lastname}
       </p>
 
       <p>
@@ -67,38 +81,34 @@ const DetalleCliente = () => {
       <h2>Dirección</h2>
 
       <p>
-        <strong>Calle:</strong> {cliente.address.street}
+        <strong>Calle:</strong> {cliente.address?.street}
       </p>
 
       <p>
-        <strong>Número:</strong> {cliente.address.number}
+        <strong>Número:</strong> {cliente.address?.number}
       </p>
 
       <p>
-        <strong>Código Postal:</strong> {cliente.address.zipcode}
+        <strong>Código Postal:</strong> {cliente.address?.zipcode}
       </p>
 
       <p>
-        <strong>Ciudad:</strong> {cliente.address.city}
+        <strong>Ciudad:</strong> {cliente.address?.city}
       </p>
 
-      <h2>Credenciales</h2>
+      <h2>Cuenta</h2>
 
       <p>
         <strong>Usuario:</strong> {cliente.username}
       </p>
 
-      <p>
-        <strong>Contraseña:</strong> {cliente.password}
-      </p>
-
-      {role?.trim() === "Gerencia" && (
-        <button className='btn-eliminar'onClick={eliminarCliente}>
+      {admin?.sector?.trim() === 'Gerencia' && (
+        <button className="btn-eliminar" onClick={eliminarCliente}>
           Eliminar Cliente
         </button>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default DetalleCliente;
+export default DetalleCliente

@@ -2,7 +2,7 @@
     background:white;
     padding:30px;
     border-radius:20px;
-    box-shadow:0px 10px 25px rgba(214,51,132,.10);
+    box-shadow:0px 10px 25px rgba(var(--color-primary-rgb),.10);
 }
 
 .clientes-container h1{
@@ -11,13 +11,13 @@
 }
 
 .contenedor-buscador{
-    background:#d63384;
+    background:var(--color-primary);
     width:700px;
     max-width:100%;
     margin:30px auto;
     padding:25px;
     border-radius:18px;
-    box-shadow:0px 10px 25px rgba(214,51,132,.18);
+    box-shadow:0px 10px 25px rgba(var(--color-primary-rgb),.18);
 }
 
 .titulo-buscador{
@@ -47,7 +47,7 @@
 
 .btn-ficha{
     display:inline-block;
-    background:#d63384;
+    background:var(--color-primary);
     color:white;
     padding:8px 16px;
     border-radius:10px;
@@ -55,22 +55,28 @@
 }
 
 .btn-ficha:hover{
-    background:#c2185b;
+    background:var(--color-primary-dark);
     color:white;
+}
+
+.tabla-clientes-wrapper{
+    width:100%;
+    overflow-x:auto;
+    margin-top:25px;
 }
 
 table{
     width:100%;
+    min-width:650px;
     border-collapse:collapse;
     background:white;
     border-radius:18px;
     overflow:hidden;
-    box-shadow:0px 12px 30px rgba(214,51,132,.10);
-    margin-top:25px;
+    box-shadow:0px 12px 30px rgba(var(--color-primary-rgb),.10);
 }
 
 thead{
-    background:#d63384;
+    background:var(--color-primary);
 }
 
 thead th{
@@ -83,11 +89,11 @@ thead th{
 tbody td{
     padding:16px;
     text-align:center;
-    border-bottom:1px solid #ffe3ef;
+    border-bottom:1px solid var(--color-bg-softer);
 }
 
 tbody tr:nth-child(even){
-    background:#fff7fa;
+    background:var(--color-bg-stripe);
 }
 
 tbody tr{
@@ -95,12 +101,12 @@ tbody tr{
 }
 
 tbody tr:hover{
-    background:#ffeef5;
+    background:var(--color-bg-softer);
 }
 
 table a{
     display:inline-block;
-    background:#d63384;
+    background:var(--color-primary);
     color:white;
     padding:8px 16px;
     border-radius:10px;
@@ -109,7 +115,7 @@ table a{
 }
 
 table a:hover{
-    background:#c2185b;
+    background:var(--color-primary-dark);
     transform:scale(1.05);
 }
 
@@ -118,5 +124,5 @@ input[type="text"]{
 }
 
 input[type="text"]::placeholder{
-    color:#c78aa6;
+    color:var(--color-placeholder);
 } 

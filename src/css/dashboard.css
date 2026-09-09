@@ -7,7 +7,7 @@
 }
 
 .dashboard h1 {
-    color: #c2185b;
+    color: var(--color-primary-dark);
     margin-bottom: 10px;
     font-size: 2rem;
 }
@@ -20,12 +20,12 @@
     margin: 20px auto;
     padding: 25px;
     border-radius: 18px;
-    box-shadow: 0px 10px 25px rgba(214, 51, 132, 0.12);
-    border-left: 6px solid #d63384;
+    box-shadow: 0px 10px 25px rgba(var(--color-primary-rgb), 0.12);
+    border-left: 6px solid var(--color-primary);
     text-align: left;
 }
 .user-card h3 {
-    color: #c2185b;
+    color: var(--color-primary-dark);
     margin-bottom: 12px;
 }
 .user-card p {
@@ -46,22 +46,22 @@
     background: white;
     border-radius: 20px;
     padding: 30px;
-    box-shadow: 0px 10px 25px rgba(214, 51, 132, 0.10);
-    border: 1px solid #ffd6e8;
+    box-shadow: 0px 10px 25px rgba(var(--color-primary-rgb), 0.10);
+    border: 1px solid var(--color-bg-soft);
     transition: 0.3s ease;
 }
 .dashboard-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0px 18px 35px rgba(214, 51, 132, 0.20);
+    box-shadow: 0px 18px 35px rgba(var(--color-primary-rgb), 0.20);
 }
 .dashboard-card h3 {
     font-size: 30px;
-    color: #c2185b;
+    color: var(--color-primary-dark);
     margin-bottom: 10px;
 }
 .dashboard-card p {
     font-size: 40px;
     font-weight: bold;
-    color: #d63384;
+    color: var(--color-primary);
 }
 
