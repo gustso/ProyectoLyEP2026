@@ -1,11 +1,11 @@
-import '../css/detallecliente.css'
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
- 
+import useAutorizaciones from "../hooks/useAutorizaciones"; // 1. Importar hook
+
 const DetalleCliente = () => {
- const { id } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
-  const role = localStorage.getItem("role");
+  const { admin } = useAutorizaciones(); // 2. Obtener admin del contexto
 
   const [cliente, setCliente] = useState(null);
   const [mensaje, setMensaje] = useState("");
