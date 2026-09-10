@@ -88,8 +88,11 @@ const DetalleCliente = () => {
         <strong>Usuario:</strong> {cliente.username}
       </p>
 
+      {/* Nunca renderizar la contraseña real en el cliente.
+          Sólo se muestra un indicador de que existe una contraseña,
+          jamás su valor (ver Hallazgo 003 - Exposición de datos sensibles). */}
       <p>
-        <strong>Contraseña:</strong> {cliente.password}
+        <strong>Contraseña:</strong> {cliente.password ? "••••••••" : "—"}
       </p>
 
       {role?.trim() === "Gerencia" && (
