@@ -33,9 +33,9 @@ const DetalleCliente = () => {
           navigate("/clientes");
         }, 2000);
       }
-    } catch {
-  setMensaje("Error al eliminar cliente");
-}
+   } catch { 
+    setMensaje("Error al eliminar cliente"); }
+    
   };
   if (!cliente) {
     return <h2>Cargando cliente...</h2>;
