@@ -1,11 +1,12 @@
 import '../css/detallecliente.css'
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
- 
+import useAutorizaciones from "../hooks/useAutorizaciones";
+
 const DetalleCliente = () => {
  const { id } = useParams();
   const navigate = useNavigate();
-  const role = localStorage.getItem("role");
+  const { admin } = useAutorizaciones();
 
   const [cliente, setCliente] = useState(null);
   const [mensaje, setMensaje] = useState("");
@@ -32,9 +33,9 @@ const DetalleCliente = () => {
           navigate("/clientes");
         }, 2000);
       }
-    } catch (error) {
-      setMensaje("Error al eliminar cliente");
-    }
+   } catch { 
+    setMensaje("Error al eliminar cliente"); }
+    
   };
   if (!cliente) {
     return <h2>Cargando cliente...</h2>;
@@ -43,7 +44,7 @@ const DetalleCliente = () => {
   return (
     <div className="detalle-cliente">
       <h1>Ficha del Cliente</h1>
-      <p>Rol actual: {role}</p>
+      <p>Rol actual: {admin?.sector}</p>
 
       {mensaje && <p className = 'mensaje-eliminado'>{mensaje}</p>}
 
@@ -88,11 +89,10 @@ const DetalleCliente = () => {
         <strong>Usuario:</strong> {cliente.username}
       </p>
 
-      <p>
-        <strong>Contraseña:</strong> {cliente.password}
-      </p>
-
-      {role?.trim() === "Gerencia" && (
+     <p>
+        <strong>Contraseña:</strong> ••••••••
+     </p>
+      {admin?.sector === "Gerencia" && (
         <button className='btn-eliminar'onClick={eliminarCliente}>
           Eliminar Cliente
         </button>
