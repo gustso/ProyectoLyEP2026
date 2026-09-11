@@ -11,6 +11,7 @@ const Login = () => {
   const [errores, setErrores] = useState({})
   const { setAdmin } = useAutorizaciones()
   const navigate = useNavigate()
+
   const validar = () => {
     const nuevosErrores = {}
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -36,10 +37,12 @@ const Login = () => {
     setErrores(nuevosErrores)
     return Object.keys(nuevosErrores).length === 0
   }
-  const manejarSubmit = (e) => {
+ //Agregue el async 
+  const manejarSubmit = async (e) => {
     e.preventDefault()
     if (!validar()) return
-    const usuario = AutorizacionesService.login(
+    //await para esperar la respuesta de la promesa
+    const usuario = await AutorizacionesService.login(
       email,
       password,
       sector
@@ -48,7 +51,12 @@ const Login = () => {
      alert('Verifique los datos')
       return
     }
+
+    // 1. Guardas el rol (como ya tenías)
     localStorage.setItem("role", usuario.sector)
+
+    // 2. AGREGAR ESTA LÍNEA: Guardas todo el objeto usuario (incluyendo su email)
+    localStorage.setItem("usuarioLogueado", JSON.stringify(usuario))
     setAdmin({
       nombre: usuario.nombre,
       email: usuario.email,

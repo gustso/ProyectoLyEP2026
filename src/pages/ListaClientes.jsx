@@ -10,23 +10,36 @@ const ListaClientes = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/users")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Error al obtener clientes");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setClientes(data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setError(true);
-        setLoading(false);
-      });
-  }, []);
+  fetch("https://fakestoreapi.com/users")
+    .then((res) => {
+      if (!res.ok) throw new Error("Error al obtener clientes");
+      return res.json();
+    })
+    .then((data) => {
+      // 1. Obtenemos el usuario activo
+      const usuarioSesion = JSON.parse(localStorage.getItem("usuarioLogueado"));
+      const emailUsuario = usuarioSesion ? usuarioSesion.email : "sesion_general";
 
+      // 2. Definimos las claves aisladas por su email
+      const claveBorrados = `clientes_borrados_${emailUsuario}`;
+      const claveCreados = `clientes_creados_${emailUsuario}`;
+
+      // 3. Traemos las listas del sessionStorage
+      const borrados = JSON.parse(sessionStorage.getItem(claveBorrados) || "[]");
+      const creados = JSON.parse(sessionStorage.getItem(claveCreados) || "[]");
+
+      // 4. Filtramos los borrados de la lista que viene de la API
+      const listaApiFiltrada = data.filter((cliente) => !borrados.includes(cliente.id));
+
+      // 5. UNIMOS los nuevos creados al principio de la lista
+      setClientes([...creados, ...listaApiFiltrada]);
+      setLoading(false);
+    })
+    .catch(() => {
+      setError(true);
+      setLoading(false);
+    });
+}, []);
   const clientesFiltrados = clientes.filter(
     (cliente) =>
       cliente.name.lastname

@@ -1,9 +1,29 @@
+import { useEffect, useState } from 'react'
 import '../css/dashboard.css'
 import useAutorizaciones from '../hooks/useAutorizaciones'
 import Login from './Login'
+import clientesService from '../services/clientesService'
+import autorizacionesServices from '../services/autorizacionesServices'
 
 const Dashboard = () => {
   const { admin } = useAutorizaciones()
+  const [totalClientes, setTotalClientes] = useState(null)
+  const [totalGerencia, setTotalGerencia] = useState(null)
+  const [totalSoporte, setTotalSoporte] = useState(null)
+
+  useEffect(() => {
+    if (admin) {
+      // Clientes desde la API
+      clientesService.obtenerClientes()
+        .then(data => setTotalClientes(data.length))
+        .catch(() => setTotalClientes('Error'))
+
+      // Gerencia y Soporte desde datos locales
+      const usuarios = autorizacionesServices.obtenerUsuarios()
+      setTotalGerencia(usuarios.filter(u => u.sector === 'Gerencia').length)
+      setTotalSoporte(usuarios.filter(u => u.sector === 'Soporte').length)
+    }
+  }, [admin])
 
   return (
     <div className="dashboard">
@@ -29,17 +49,17 @@ const Dashboard = () => {
 
             <div className="dashboard-card">
               <h3>Clientes</h3>
-              <p>10</p>
+              <p>{totalClientes ?? '...'}</p>
             </div>
 
             <div className="dashboard-card">
               <h3>Gerencia</h3>
-              <p>3</p>
+              <p>{totalGerencia ?? '...'}</p>
             </div>
 
             <div className="dashboard-card">
               <h3>Soporte</h3>
-              <p>3</p>
+              <p>{totalSoporte ?? '...'}</p>
             </div>
           </div>
 
