@@ -89,10 +89,9 @@ const DetalleCliente = () => {
         <strong>Usuario:</strong> {cliente.username}
       </p>
 
-      <p>
-        <strong>Contraseña:</strong> {cliente.password}
-      </p>
-
+     <p>
+        <strong>Contraseña:</strong> ••••••••
+     </p>
       {admin?.sector === "Gerencia" && (
         <button className='btn-eliminar'onClick={eliminarCliente}>
           Eliminar Cliente
