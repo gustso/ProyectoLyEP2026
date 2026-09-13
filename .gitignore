@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+# COMMIT: "chore: mover la URL de la API a una variable de entorno"
+.env
 
 # Editor directories and files
 .vscode/*
