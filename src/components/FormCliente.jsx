@@ -3,7 +3,9 @@ import { useState } from "react";
 import { Form, Button, Alert, Spinner } from "react-bootstrap";
 import clientesService from "../services/clientesService";
 
-const FormCliente = () => {
+// COMMIT: "fix: refrescar la lista de clientes al crear uno nuevo"
+// (antes: const FormCliente = () => { ... }, sin el prop onClienteCreado)
+const FormCliente = ({ onClienteCreado }) => {
 
     const [nombre, setNombre] = useState("");
     const [email, setEmail] = useState("");
@@ -65,6 +67,10 @@ const FormCliente = () => {
             setMensaje(
                 `Cliente creado correctamente. ID: ${respuesta.id}`
             );
+
+            // COMMIT: "fix: refrescar la lista de clientes al crear uno nuevo"
+            // (antes: esta linea no existia, ListaClientes no se enteraba del alta)
+            onClienteCreado?.({ ...nuevoCliente, id: respuesta.id });
 
             setNombre("");
             setEmail("");

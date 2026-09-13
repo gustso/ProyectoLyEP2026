@@ -7,8 +7,11 @@ import AutorizacionesService from '../services/autorizacionesServices'
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [sector, setSector] = useState('')
   const [errores, setErrores] = useState({})
+  // COMMIT: "fix: unificar el rol de sesion y quitar el alert() del login"
+  // (junto con la eliminacion de localStorage.setItem('role', ...) mas abajo,
+  // y el mismo cambio en DetalleCliente.jsx)
+  const [errorLogin, setErrorLogin] = useState('')
   const { setAdmin } = useAutorizaciones()
   const navigate = useNavigate()
   const validar = () => {
@@ -21,34 +24,29 @@ const Login = () => {
     }
     if (!password) {
       nuevosErrores.password = 'La contraseña es obligatoria'
-    } else {
-      if (password.length < 8) {
-        nuevosErrores.password = 'Mínimo 8 caracteres'
-      } else if (!/[A-Z]/.test(password)) {
-        nuevosErrores.password = 'Debe tener una mayúscula'
-      } else if (!/[0-9]/.test(password)) {
-        nuevosErrores.password = 'Debe tener un número'
-      }
     }
-    if (!sector) {
-      nuevosErrores.sector = 'Seleccione un sector'
-    }
+    // COMMIT: "fix: simplificar la validacion de contraseña en el login"
+    // (aca antes habia un else con chequeo de longitud/mayuscula/numero, se eliminó)
+    // COMMIT: "fix: el sector del login lo determina el usuario, no un select"
+    // (aca antes habia un if(!sector) que agregaba nuevosErrores.sector, se eliminó)
     setErrores(nuevosErrores)
     return Object.keys(nuevosErrores).length === 0
   }
   const manejarSubmit = (e) => {
     e.preventDefault()
+    setErrorLogin('')
     if (!validar()) return
-    const usuario = AutorizacionesService.login(
-      email,
-      password,
-      sector
-    )
+    // COMMIT: "fix: el sector del login lo determina el usuario, no un select"
+    // (antes se llamaba login(email, password, sector))
+    const usuario = AutorizacionesService.login(email, password)
     if (!usuario) {
-     alert('Verifique los datos')
+      // COMMIT: "fix: unificar el rol de sesion y quitar el alert() del login"
+      // (antes era: alert('Verifique los datos'))
+      setErrorLogin('Verifique los datos')
       return
     }
-    localStorage.setItem("role", usuario.sector)
+    // COMMIT: "fix: unificar el rol de sesion y quitar el alert() del login"
+    // (aca antes habia: localStorage.setItem("role", usuario.sector), se eliminó)
     setAdmin({
       nombre: usuario.nombre,
       email: usuario.email,
@@ -60,24 +58,39 @@ const Login = () => {
     <div className="login-container">
       <h1>Iniciar Sesión</h1>
       <form onSubmit={manejarSubmit}>
-        <label>Email:</label>
-        <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <p style={{ color: 'red', minHeight: '18px' }}>
+        {/* COMMIT: "fix: mejorar accesibilidad del login y la pagina 404" */}
+        {/* (htmlFor="email" / id="email" agregados) */}
+        <label htmlFor="email">Email:</label>
+        <input
+          id="email"
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        {/* COMMIT: "fix: mover estilos inline del login a una clase CSS" */}
+        {/* (antes: style={{ color: 'red', minHeight: '18px' }}) */}
+        {/* COMMIT: "fix: mejorar accesibilidad del login y la pagina 404" */}
+        {/* (aria-live="polite" agregado) */}
+        <p className="campo-error" aria-live="polite">
           {errores.email || ' '}
         </p>
-        <label>Contraseña:</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <p style={{ color: 'red', minHeight: '18px' }}>
+        {/* COMMIT: "fix: mejorar accesibilidad del login y la pagina 404" */}
+        {/* (htmlFor="password" / id="password" agregados) */}
+        <label htmlFor="password">Contraseña:</label>
+        <input
+          id="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <p className="campo-error" aria-live="polite">
           {errores.password || ' '}
         </p>
-        <label>Sector:</label>
-        <select value={sector} onChange={(e) => setSector(e.target.value)}>
-          <option value="">Seleccione un sector</option>
-          <option value="Soporte">Soporte</option>
-          <option value="Gerencia">Gerencia</option>
-        </select>
-        <p style={{ color: 'red', minHeight: '18px' }}>
-          {errores.sector || ' '}
+        {/* COMMIT: "fix: el sector del login lo determina el usuario, no un select" */}
+        {/* (aca antes estaba el <label>Sector:</label> y el <select> con Soporte/Gerencia,
+            junto con el <p> de errores.sector, todo eliminado) */}
+        <p className="campo-error" aria-live="polite">
+          {errorLogin || ' '}
         </p>
         <button type="submit">Ingresar</button>
       </form>

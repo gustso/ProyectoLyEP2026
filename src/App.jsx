@@ -6,13 +6,20 @@ import AppRoutes from './routes/routes'
 import useAutorizaciones from './hooks/useAutorizaciones'
 
 function App() {
-return (
-<>
-    <Header />
-      <Nav />
-        <AppRoutes />
-    <Footer />
-</>
-)
+  // COMMIT: "fix: ocultar Header y Nav cuando no hay sesion activa"
+  // (antes useAutorizaciones se importaba pero no se usaba)
+  const { admin } = useAutorizaciones()
+
+  return (
+    <>
+      {/* COMMIT: "fix: ocultar Header y Nav cuando no hay sesion activa" */}
+      {/* (antes: <Header /> y <Nav /> se renderizaban siempre, sin el {admin && ...}) */}
+      {admin && <Header />}
+      {admin && <Nav />}
+      <AppRoutes />
+      <Footer />
+    </>
+  )
 }
 export default App
+  

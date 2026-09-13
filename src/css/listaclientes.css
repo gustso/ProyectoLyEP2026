@@ -59,14 +59,24 @@
     color:white;
 }
 
+/* COMMIT: "fix: hacer responsive la tabla de clientes" */
+/* (regla nueva; antes table tenia margin-top:25px, que se movio aca) */
+.tabla-clientes-wrapper{
+    width:100%;
+    overflow-x:auto;
+    margin-top:25px;
+}
+
+/* COMMIT: "fix: hacer responsive la tabla de clientes" */
+/* (se agrego min-width:650px y se saco margin-top, movido al wrapper de arriba) */
 table{
     width:100%;
+    min-width:650px;
     border-collapse:collapse;
     background:white;
     border-radius:18px;
     overflow:hidden;
     box-shadow:0px 12px 30px rgba(214,51,132,.10);
-    margin-top:25px;
 }
 
 thead{

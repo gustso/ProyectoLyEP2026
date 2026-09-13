@@ -36,12 +36,13 @@ const usuarios = [
     sector: 'Gerencia'
   }
 ]
-const login = (email, password, sector) => {
+// COMMIT: "fix: el sector del login lo determina el usuario, no un select"
+// (antes: const login = (email, password, sector) => { ... usuario.sector === sector })
+const login = (email, password) => {
   return usuarios.find(
     usuario =>
       usuario.email === email &&
-      usuario.password === password &&
-      usuario.sector === sector
+      usuario.password === password
   )
 }
 export default {
