@@ -59,15 +59,23 @@
     color:white;
 }
 
+.tabla-clientes-wrapper{
+    width: 100%;
+    overflow: auto;
+    margin-top: 25px;
+}
+
 table{
     width:100%;
+    min-width: 650px;
     border-collapse:collapse;
     background:white;
     border-radius:18px;
     overflow:hidden;
     box-shadow:0px 12px 30px rgba(214,51,132,.10);
-    margin-top:25px;
 }
+
+
 
 thead{
     background:#d63384;

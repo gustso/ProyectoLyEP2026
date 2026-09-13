@@ -56,6 +56,14 @@ form p{
     font-size:14px;
 }
 
+/* COMMIT: "fix: mover estilos inline del login a una clase CSS" */
+/* (regla nueva; antes esto estaba como style={{ color: 'red', minHeight: '18px' }}
+   inline en cada <p> de error de Login.jsx) */
+.campo-error{
+    color:red;
+    min-height:18px;
+}
+
 form button{
     width:100%;
     background:#d63384;

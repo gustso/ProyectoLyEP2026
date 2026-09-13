@@ -11,19 +11,8 @@ form .form-control{
 }
 
 form .form-control:focus{
-    border-color:#d63384;
-    box-shadow:0px 0px 10px rgba(214,51,132,.18);
-}
-
-form button{
-    width:100%;
-    margin-top:10px;
-    background:#d63384;
-    border:none;
-}
-
-form button:hover{
-    background:#c2185b;
+    border-color:#337fd6;
+    box-shadow:0px 0px 10px #d633842e;
 }
 
 .alert{

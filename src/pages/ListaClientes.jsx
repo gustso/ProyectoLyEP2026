@@ -1,39 +1,31 @@
 import "../css/listaclientes.css"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import FormCliente from "../components/FormCliente";
+// COMMIT: "refactor: extraer la carga de clientes a un hook useClientes"
+// (antes: este import no existia, tampoco useEffect en este archivo)
+import useClientes from "../hooks/useClientes";
 
 const ListaClientes = () => {
-  const [clientes, setClientes] = useState([]);
+  // COMMIT: "refactor: extraer la carga de clientes a un hook useClientes"
+  // (antes aca estaban useState de clientes/loading/error + el useEffect con
+  // el fetch/axios y AbortController, y la funcion agregarCliente local;
+  // todo eso se movio al hook. Ese fetch habia pasado antes por los commits
+  // "fix: usar optional chaining..." (5), "fix: refrescar la lista..." (6),
+  // "fix: cancelar peticiones fetch..." (7) y
+  // "refactor: centralizar llamadas HTTP en clientesService" (11))
+  const { clientes, loading, error, agregarCliente } = useClientes();
   const [busqueda, setBusqueda] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
 
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/users")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Error al obtener clientes");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setClientes(data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setError(true);
-        setLoading(false);
-      });
-  }, []);
-
+  // COMMIT: "fix: usar optional chaining en el filtro y la tabla de clientes"
+  // (antes: cliente.name.lastname.toLowerCase()... sin los ?.)
   const clientesFiltrados = clientes.filter(
     (cliente) =>
-      cliente.name.lastname
-        .toLowerCase()
+      cliente.name?.lastname
+        ?.toLowerCase()
         .includes(busqueda.toLowerCase()) ||
-      cliente.address.city
-        .toLowerCase()
+      cliente.address?.city
+        ?.toLowerCase()
         .includes(busqueda.toLowerCase())
   );
 
@@ -49,7 +41,9 @@ const ListaClientes = () => {
     <div className="clientes-container">
 
       <h1>Clientes</h1>
-      <FormCliente />
+      {/* COMMIT: "fix: refrescar la lista de clientes al crear uno nuevo" */}
+      {/* (antes: <FormCliente /> sin el prop onClienteCreado) */}
+      <FormCliente onClienteCreado={agregarCliente} />
 
       <hr />
 
@@ -72,7 +66,10 @@ const ListaClientes = () => {
         </p>
 
       </div>
-      <table className="tabla-clientes">
+
+
+      <div className="tabla-clientes-wrapper">
+        <table className="tabla-clientes">
 
         <thead>
           <tr>
@@ -92,15 +89,17 @@ const ListaClientes = () => {
 
               <td>{cliente.id}</td>
 
+              {/* COMMIT: "fix: usar optional chaining en el filtro y la tabla de clientes" */}
+              {/* (antes: cliente.name.firstname / cliente.name.lastname sin ?.) */}
               <td>
-                {cliente.name.firstname} {cliente.name.lastname}
+                {cliente.name?.firstname} {cliente.name?.lastname}
               </td>
 
               <td>{cliente.email}</td>
 
               <td>{cliente.phone}</td>
 
-              <td>{cliente.address.city}</td>
+              <td>{cliente.address?.city}</td>
 
               <td>
                 <Link
@@ -117,6 +116,8 @@ const ListaClientes = () => {
         </tbody>
 
       </table>
+      </div>
+      
 
     </div>
   );
