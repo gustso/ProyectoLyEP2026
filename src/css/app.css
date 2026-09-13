@@ -1,64 +1,63 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
-    flex: 1;
+  flex: 1;
 }
-h1{
-    color:#d63384;
-    font-weight:700;
-    margin-bottom:25px;
-}
-
-h2{
-    color:#c2185b;
-    margin-bottom:20px;
+h1 {
+  color: #d63384;
+  font-weight: 700;
+  margin-bottom: 25px;
 }
 
-h3{
-    color:#e75480;
+h2 {
+  color: #c2185b;
+  margin-bottom: 20px;
 }
 
-a{
-    text-decoration:none;
+h3 {
+  color: #e75480;
 }
 
-hr{
-    border:none;
-    height:2px;
-    background:#ffd6e7;
-    margin:35px 0;
+a {
+  text-decoration: none;
+}
+
+hr {
+  border: none;
+  height: 2px;
+  background: #ffd6e7;
+  margin: 35px 0;
 }
 
 h1,
 h2,
-h3{
-    letter-spacing:.3px;
+h3 {
+  letter-spacing: 0.3px;
 }
 
 button:hover,
-.btn:hover{
-    cursor:pointer;
+.btn:hover {
+  cursor: pointer;
 }
 
 input,
 select,
 button,
 .btn,
-table a{
-    transition:.25s;
+table a {
+  transition: 0.25s;
 }
 
-::selection{
-    background:#d63384;
-    color:white;
+::selection {
+  background: #d63384;
+  color: white;
 }
-

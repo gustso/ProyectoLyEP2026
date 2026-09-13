@@ -1,67 +1,66 @@
 .dashboard {
-    padding: 30px 40px;
-    text-align: center;
-    background: #f5f7fb;
-    min-height: 80vh;
-    margin-bottom: 20px;
+  padding: 30px 40px;
+  text-align: center;
+  background: #f5f7fb;
+  min-height: 80vh;
+  margin-bottom: 20px;
 }
 
 .dashboard h1 {
-    color: #c2185b;
-    margin-bottom: 10px;
-    font-size: 2rem;
+  color: #c2185b;
+  margin-bottom: 10px;
+  font-size: 2rem;
 }
 .dashboard-login {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 .user-card {
-    background: white;
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0px 10px 25px rgba(214, 51, 132, 0.12);
-    border-left: 6px solid #d63384;
-    text-align: left;
+  background: white;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0px 10px 25px rgba(214, 51, 132, 0.12);
+  border-left: 6px solid #d63384;
+  text-align: left;
 }
 .user-card h3 {
-    color: #c2185b;
-    margin-bottom: 12px;
+  color: #c2185b;
+  margin-bottom: 12px;
 }
 .user-card p {
-    font-size: 16px;
-    margin: 6px 0;
-    color: #2d3748;
+  font-size: 16px;
+  margin: 6px 0;
+  color: #2d3748;
 }
 .dashboard-cards {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 25px;
-    margin-top: 30px;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 .dashboard-card {
-    width: 220px;
-    background: white;
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0px 10px 25px rgba(214, 51, 132, 0.10);
-    border: 1px solid #ffd6e8;
-    transition: 0.3s ease;
+  width: 220px;
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0px 10px 25px rgba(214, 51, 132, 0.1);
+  border: 1px solid #ffd6e8;
+  transition: 0.3s ease;
 }
 .dashboard-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0px 18px 35px rgba(214, 51, 132, 0.20);
+  transform: translateY(-6px);
+  box-shadow: 0px 18px 35px rgba(214, 51, 132, 0.2);
 }
 .dashboard-card h3 {
-    font-size: 30px;
-    color: #c2185b;
-    margin-bottom: 10px;
+  font-size: 30px;
+  color: #c2185b;
+  margin-bottom: 10px;
 }
 .dashboard-card p {
-    font-size: 40px;
-    font-weight: bold;
-    color: #d63384;
+  font-size: 40px;
+  font-weight: bold;
+  color: #d63384;
 }
-

@@ -38,10 +38,8 @@ const usuarios = [
 ]
 const login = (email, password, sector) => {
   return usuarios.find(
-    usuario =>
-      usuario.email === email &&
-      usuario.password === password &&
-      usuario.sector === sector
+    (usuario) =>
+      usuario.email === email && usuario.password === password && usuario.sector === sector
   )
 }
 export default {

@@ -6,13 +6,13 @@ import AppRoutes from './routes/routes'
 import useAutorizaciones from './hooks/useAutorizaciones'
 
 function App() {
-return (
-<>
-    <Header />
+  return (
+    <>
+      <Header />
       <Nav />
-        <AppRoutes />
-    <Footer />
-</>
-)
+      <AppRoutes />
+      <Footer />
+    </>
+  )
 }
 export default App

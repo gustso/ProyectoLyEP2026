@@ -7,7 +7,6 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-
       <h1>Panel de Control de Clientes</h1>
 
       {!admin ? (
@@ -21,12 +20,17 @@ const Dashboard = () => {
           <div className="user-card">
             <h3>Usuario conectado</h3>
 
-            <p><strong>Administrador:</strong> {admin.nombre}</p>
-            <p><strong>Email:</strong> {admin.email}</p>
-            <p><strong>Sector:</strong> {admin.sector}</p>
+            <p>
+              <strong>Administrador:</strong> {admin.nombre}
+            </p>
+            <p>
+              <strong>Email:</strong> {admin.email}
+            </p>
+            <p>
+              <strong>Sector:</strong> {admin.sector}
+            </p>
           </div>
           <div className="dashboard-cards">
-
             <div className="dashboard-card">
               <h3>Clientes</h3>
               <p>10</p>
@@ -42,10 +46,8 @@ const Dashboard = () => {
               <p>3</p>
             </div>
           </div>
-
         </>
       )}
-
     </div>
   )
 }

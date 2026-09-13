@@ -39,16 +39,12 @@ const Login = () => {
   const manejarSubmit = (e) => {
     e.preventDefault()
     if (!validar()) return
-    const usuario = AutorizacionesService.login(
-      email,
-      password,
-      sector
-    )
+    const usuario = AutorizacionesService.login(email, password, sector)
     if (!usuario) {
-     alert('Verifique los datos')
+      alert('Verifique los datos')
       return
     }
-    localStorage.setItem("role", usuario.sector)
+    localStorage.setItem('role', usuario.sector)
     setAdmin({
       nombre: usuario.nombre,
       email: usuario.email,
@@ -62,23 +58,17 @@ const Login = () => {
       <form onSubmit={manejarSubmit}>
         <label>Email:</label>
         <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <p style={{ color: 'red', minHeight: '18px' }}>
-          {errores.email || ' '}
-        </p>
+        <p style={{ color: 'red', minHeight: '18px' }}>{errores.email || ' '}</p>
         <label>Contraseña:</label>
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <p style={{ color: 'red', minHeight: '18px' }}>
-          {errores.password || ' '}
-        </p>
+        <p style={{ color: 'red', minHeight: '18px' }}>{errores.password || ' '}</p>
         <label>Sector:</label>
         <select value={sector} onChange={(e) => setSector(e.target.value)}>
           <option value="">Seleccione un sector</option>
           <option value="Soporte">Soporte</option>
           <option value="Gerencia">Gerencia</option>
         </select>
-        <p style={{ color: 'red', minHeight: '18px' }}>
-          {errores.sector || ' '}
-        </p>
+        <p style={{ color: 'red', minHeight: '18px' }}>{errores.sector || ' '}</p>
         <button type="submit">Ingresar</button>
       </form>
     </div>

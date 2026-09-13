@@ -9,7 +9,6 @@ import RutaProtegida from '../components/RutaProtegida'
 const AppRoutes = () => {
   return (
     <Routes>
-
       <Route path="/login" element={<Login />} />
       <Route
         path="/"
@@ -30,13 +29,12 @@ const AppRoutes = () => {
       <Route
         path="/clientes/:id"
         element={
-         <RutaProtegida>
-          <DetalleCliente />
-         </RutaProtegida>
-      }
+          <RutaProtegida>
+            <DetalleCliente />
+          </RutaProtegida>
+        }
       />
       <Route path="*" element={<ErrorPage />} />
-
     </Routes>
   )
 }

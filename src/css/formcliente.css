@@ -1,34 +1,34 @@
-.formulario-cliente{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    margin:20px 0;
+.formulario-cliente {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
 }
 
-form .form-control{
-    border-radius:12px;
-    border:1px solid #f6bfd5;
+form .form-control {
+  border-radius: 12px;
+  border: 1px solid #f6bfd5;
 }
 
-form .form-control:focus{
-    border-color:#d63384;
-    box-shadow:0px 0px 10px rgba(214,51,132,.18);
+form .form-control:focus {
+  border-color: #d63384;
+  box-shadow: 0px 0px 10px rgba(214, 51, 132, 0.18);
 }
 
-form button{
-    width:100%;
-    margin-top:10px;
-    background:#d63384;
-    border:none;
+form button {
+  width: 100%;
+  margin-top: 10px;
+  background: #d63384;
+  border: none;
 }
 
-form button:hover{
-    background:#c2185b;
+form button:hover {
+  background: #c2185b;
 }
 
-.alert{
-    border-radius:12px !important;
-    border:none !important;
-    margin-top:20px;
-    box-shadow:0px 8px 20px rgba(214,51,132,.10);
-} 
+.alert {
+  border-radius: 12px !important;
+  border: none !important;
+  margin-top: 20px;
+  box-shadow: 0px 8px 20px rgba(214, 51, 132, 0.1);
+}
