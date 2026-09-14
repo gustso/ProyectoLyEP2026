@@ -1,6 +1,6 @@
 import '../css/login.css'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Navigate } from 'react-router-dom'
 import useAutorizaciones from '../hooks/useAutorizaciones'
 import AutorizacionesService from '../services/autorizacionesServices'
 
@@ -9,8 +9,9 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [sector, setSector] = useState('')
   const [errores, setErrores] = useState({})
-  const { setAdmin } = useAutorizaciones()
+  const { admin, setAdmin } = useAutorizaciones()
   const navigate = useNavigate()
+    if (admin) return <Navigate to="/" replace />
   const validar = () => {
     const nuevosErrores = {}
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -48,7 +49,6 @@ const Login = () => {
      alert('Verifique los datos')
       return
     }
-    localStorage.setItem("role", usuario.sector)
     setAdmin({
       nombre: usuario.nombre,
       email: usuario.email,
