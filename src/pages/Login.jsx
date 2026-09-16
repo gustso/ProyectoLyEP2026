@@ -36,13 +36,13 @@ const Login = () => {
     setErrores(nuevosErrores)
     return Object.keys(nuevosErrores).length === 0
   }
-  const manejarSubmit = (e) => {
-    e.preventDefault()
-    if (!validar()) return
-    const usuario = AutorizacionesService.login(
-      email,
-      password,
-      sector
+  const manejarSubmit = async (e) => {
+  e.preventDefault()
+  if (!validar()) return
+  const usuario = await AutorizacionesService.login(
+    email,
+    password,
+    sector
     )
     if (!usuario) {
      alert('Verifique los datos')
