@@ -1,6 +1,6 @@
-import { createContext, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import { AutorizacionesContext } from './autorizaciones.context'
 
-export const AutorizacionesContext = createContext()
 
 const AutorizacionesProvider = ({ children }) => {
 
