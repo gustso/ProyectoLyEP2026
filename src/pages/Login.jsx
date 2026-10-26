@@ -61,7 +61,7 @@ const Login = () => {
       <h1>Iniciar Sesión</h1>
       <form onSubmit={manejarSubmit}>
         <label>Email:</label>
-        <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         <p style={{ color: 'red', minHeight: '18px' }}>
           {errores.email || ' '}
         </p>

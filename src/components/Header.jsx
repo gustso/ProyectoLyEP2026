@@ -5,32 +5,33 @@ import useAutorizaciones  from "../hooks/useAutorizaciones";
 
 const Header = () => {
     const { admin, cerrarSesion } = useAutorizaciones();
-    const navigate=useNavigate()
-    const manejarCerrarSesion=()=>{
+    const navigate = useNavigate()
+    
+    const manejarCerrarSesion = () => {
         cerrarSesion()
-        navigate ('/login')
+        navigate('/login')
     }
+
     return (
-    <Navbar>
-        <Container>
-            <Navbar.Brand>
-                Panel de Control de Clientes
-            </Navbar.Brand>
-            {
-                admin && (
-                    <div className="usuario-header">
-                       <p>
-                         {admin.nombre} - {admin.sector}
-                     </p>
-                        <Button className="btn-header"
-                         onClick={manejarCerrarSesion}
-                        > Cerrar Sesion </Button>
-                    </div>
-                )
-            }
-        </Container>
-    </Navbar>
-               
+        <Navbar>
+            <Container>
+                <Navbar.Brand>
+                    Panel de Control de Clientes
+                </Navbar.Brand>
+                {
+                    admin && (
+                        <div className="usuario-header">
+                           <p className="mb-0">
+                             {admin.nombre} - {admin.sector}
+                         </p>
+                            <Button className="btn-header"
+                             onClick={manejarCerrarSesion}
+                            > Cerrar Sesión </Button>
+                        </div>
+                    )
+                }
+            </Container>
+        </Navbar>
     )
 }
 export default Header;
