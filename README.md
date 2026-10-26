@@ -26,3 +26,17 @@ El código fuente está bajo licencia MIT.
 La documentación y material pedagógico están bajo Creative Commons Attribution 4.0.
 
 © 2026 — Cátedra Legislación y Ejercicio Profesional - Carrera Analista Programador Universitario - FI UNJu
+
+## Tests
+
+Este proyecto usa Vitest + React Testing Library.
+
+Para correr los tests:
+
+```bash
+npm run test
+```
+
+Cobertura actual:
+- `Login.jsx`: validación de email, contraseña (longitud, mayúscula, número) y sector obligatorio; login exitoso y credenciales inválidas
+- `RutaProtegida.jsx`: redirección a `/login` sin sesión, acceso permitido con sesión activa

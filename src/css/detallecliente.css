@@ -56,3 +56,15 @@
     font-weight:bold;
     margin-bottom:25px;
 }
+
+.mensaje-error{
+    background:#f8d7da;
+    color:#842029;
+    border:1px solid #f1aeb5;
+    padding:15px;
+    border-radius:12px;
+    text-align:center;
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:25px;
+}
